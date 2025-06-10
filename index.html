@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cartões Interativos</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .container {
+            width: 100%;
+            height: 200px;
+            perspective: 1000px;
+            margin-bottom: 20px;
+        }
+
+        .cartao {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+            cursor: pointer;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .cartao.virado {
+            transform: rotateY(180deg);
+        }
+
+        .frente, .verso {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 15px;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .frente {
+            background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+            color: white;
+        }
+
+        .verso {
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            transform: rotateY(180deg);
+            color: white;
+        }
+
+        /* Temas específicos para cada cartão */
+        .aniversario .frente { background: linear-gradient(135deg, #FF69B4, #FFB6C1); }
+        .aniversario .verso { background: linear-gradient(135deg, #FF1493, #FF69B4); }
+
+        .natal .frente { background: linear-gradient(135deg, #228B22, #32CD32); }
+        .natal .verso { background: linear-gradient(135deg, #006400, #228B22); }
+
+        .maes .frente { background: linear-gradient(135deg, #FF69B4, #FFC0CB); }
+        .maes .verso { background: linear-gradient(135deg, #FF1493, #FF69B4); }
+
+        .namorados .frente { background: linear-gradient(135deg, #FF0000, #FF69B4); }
+        .namorados .verso { background: linear-gradient(135deg, #DC143C, #FF1493); }
+
+        .ano-novo .frente { background: linear-gradient(135deg, #000080, #4169E1); }
+        .ano-novo .verso { background: linear-gradient(135deg, #0000CD, #1E90FF); }
+
+        .pascoa .frente { background: linear-gradient(135deg, #9370DB, #BA55D3); }
+        .pascoa .verso { background: linear-gradient(135deg, #8A2BE2, #9932CC); }
+
+        .professor .frente { background: linear-gradient(135deg, #4682B4, #87CEEB); }
+        .professor .verso { background: linear-gradient(135deg, #1E90FF, #00BFFF); }
+
+        .desculpas .frente { background: linear-gradient(135deg, #808080, #A9A9A9); }
+        .desculpas .verso { background: linear-gradient(135deg, #696969, #808080); }
+
+        .motivacional .frente { background: linear-gradient(135deg, #FFD700, #FFA500); }
+        .motivacional .verso { background: linear-gradient(135deg, #FFA500, #FF8C00); }
+
+        .junina .frente { background: linear-gradient(135deg, #FF4500, #FF6347); }
+        .junina .verso { background: linear-gradient(135deg, #FF7F50, #FF8C00); }
+
+        .emoji {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Cartões Interativos</h1>
+    <div class="cards-grid">
+        <!-- Aniversário -->
+        <div class="container">
+            <div class="cartao aniversario" data-tema="aniversario">
+                <div class="frente">
+                    <div class="emoji">🎂</div>
+                    Feliz Aniversário!
+                </div>
+                <div class="verso">
+                    Que este dia seja especial e cheio de alegria! Que todos os seus sonhos se realizem e que você continue brilhando como sempre! 🎉✨
+                </div>
+            </div>
+        </div>
+
+        <!-- Natal -->
+        <div class="container">
+            <div class="cartao natal" data-tema="natal">
+                <div class="frente">
+                    <div class="emoji">🎄</div>
+                    Feliz Natal!
+                </div>
+                <div class="verso">
+                    Que o espírito natalino traga paz, amor e alegria para você e sua família! 🎅🎁
+                </div>
+            </div>
+        </div>
+
+        <!-- Dia das Mães -->
+        <div class="container">
+            <div class="cartao maes" data-tema="maes">
+                <div class="frente">
+                    <div class="emoji">💐</div>
+                    Feliz Dia das Mães!
+                </div>
+                <div class="verso">
+                    Para a mulher mais especial do mundo! Obrigado por todo seu amor e dedicação. Você é única! ❤️
+                </div>
+            </div>
+        </div>
+
+        <!-- Dia dos Namorados -->
+        <div class="container">
+            <div class="cartao namorados" data-tema="namorados">
+                <div class="frente">
+                    <div class="emoji">❤️</div>
+                    Feliz Dia dos Namorados!
+                </div>
+                <div class="verso">
+                    Que nosso amor continue crescendo e nos fazendo felizes todos os dias! 💑
+                </div>
+            </div>
+        </div>
+
+        <!-- Ano Novo -->
+        <div class="container">
+            <div class="cartao ano-novo" data-tema="ano-novo">
+                <div class="frente">
+                    <div class="emoji">🎆</div>
+                    Feliz Ano Novo!
+                </div>
+                <div class="verso">
+                    Que 2024 traga muitas conquistas, alegrias e realizações! 🎊✨
+                </div>
+            </div>
+        </div>
+
+        <!-- Páscoa -->
+        <div class="container">
+            <div class="cartao pascoa" data-tema="pascoa">
+                <div class="frente">
+                    <div class="emoji">🐰</div>
+                    Feliz Páscoa!
+                </div>
+                <div class="verso">
+                    Que esta Páscoa traga renovação, esperança e muitas alegrias para você! 🥚
+                </div>
+            </div>
+        </div>
+
+        <!-- Dia do Professor -->
+        <div class="container">
+            <div class="cartao professor" data-tema="professor">
+                <div class="frente">
+                    <div class="emoji">📚</div>
+                    Feliz Dia do Professor!
+                </div>
+                <div class="verso">
+                    Obrigado por compartilhar seu conhecimento e inspirar tantas vidas! 👨‍🏫👩‍🏫
+                </div>
+            </div>
+        </div>
+
+        <!-- Desculpas -->
+        <div class="container">
+            <div class="cartao desculpas" data-tema="desculpas">
+                <div class="frente">
+                    <div class="emoji">🙏</div>
+                    Me Desculpe
+                </div>
+                <div class="verso">
+                    Peço desculpas sinceras pelo que aconteceu. Sua amizade é muito importante para mim. 🤝
+                </div>
+            </div>
+        </div>
+
+        <!-- Motivacional -->
+        <div class="container">
+            <div class="cartao motivacional" data-tema="motivacional">
+                <div class="frente">
+                    <div class="emoji">💪</div>
+                    Você é Incrível!
+                </div>
+                <div class="verso">
+                    Acredite em si mesmo! Você é capaz de conquistar tudo o que desejar! ⭐
+                </div>
+            </div>
+        </div>
+
+        <!-- Festa Junina -->
+        <div class="container">
+            <div class="cartao junina" data-tema="junina">
+                <div class="frente">
+                    <div class="emoji">🎪</div>
+                    Feliz São João!
+                </div>
+                <div class="verso">
+                    Que esta festa junina seja cheia de alegria, dança e comidas deliciosas! 🎭
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.cartao').forEach(cartao => {
+            cartao.addEventListener('click', () => {
+                cartao.classList.toggle('virado');
+            });
+        });
+    </script>
+</body>
+</html>
